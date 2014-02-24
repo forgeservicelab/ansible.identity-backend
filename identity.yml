@@ -18,12 +18,12 @@
       when: verify_epel_installed|failed
 
   roles:
-# https://git.forgeservicelab.fi/ansible-roles/forge-hostname.git
+# git clone https://git.forgeservicelab.fi/ansible-roles/forge-hostname.git
     - role: forge_hostname
 # ansible-galaxy install goozbach.EPEL
     - role: goozbach.EPEL
       when: verify_epel_installed|failed
-# https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
+# git clone https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
     - role: openldap_server
       openldap_server_domain_name: "{{ ansible_fqdn }}"
       openldap_server_rootpw: "{{ ldap_manager_password }}"
