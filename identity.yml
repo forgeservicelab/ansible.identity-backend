@@ -1,0 +1,43 @@
+- hosts: "{{ h }}"
+
+  vars:
+    ldaps_port: 636
+    webui_port: 443
+    ldap_dn: dc=julkict,dc=forgeservicelab,dc=fi
+
+  vars_files:
+    - secrets.yml
+
+  pre_tasks:
+    - shell: yum --enablerepo epel version
+      register: verify_epel_installed
+      ignore_errors: True
+
+    - name: remove installed libyaml as it conflicts with EPEL libyaml
+      yum: name=libyaml state=removed
+      when: verify_epel_installed|failed
+
+  roles:
+# https://git.forgeservicelab.fi/ansible-roles/forge-hostname.git
+    - role: forge_hostname
+# ansible-galaxy install goozbach.EPEL
+    - role: goozbach.EPEL
+      when: verify_epel_installed|failed
+# https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
+    - role: openldap_server
+      openldap_server_domain_name: "{{ ansible_fqdn }}"
+      openldap_server_rootpw: "{{ ldap_manager_password }}"
+      openldap_server_enable_ssl: true
+      openldap_server_country: FI
+      openldap_server_state: Uusimaa
+      openldap_server_location: Helsinki
+      openldap_server_organization: JulkICTLAB
+      openldap_server_dn: "{{ ldap_dn }}"
+
+  tasks:
+    - shell: lokkit -p {{ ldaps_port }}:tcp
+    - shell: lokkit -p {{ webui_port }}:tcp
+
+  post_tasks:
+    - debug:
+        msg: "visit https://{{ ansible_fqdn }}:{{ webui_port }}"
