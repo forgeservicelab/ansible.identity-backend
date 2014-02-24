@@ -7,10 +7,10 @@ In future, it will also install some web interface.
 ## Usage
 
 1. Get a virtual machine, find out its public IP, get the IP to inventory. Simple inventory can be
-```
-[dev_machines]
-193.166.1.18
-```
+    ```
+    [dev_machines]
+    193.166.1.18
+    ```
 2. Get the roles. First create directory called roles and then download the roles to it. See the main yml file for where to get the roles.
 
 
