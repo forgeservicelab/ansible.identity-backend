@@ -19,7 +19,7 @@
       when: verify_epel_installed|failed
 
   roles:
-      # $ git clone https://git.forgeservicelab.fi/ansible-roles/forge-hostname.git
+      # $ git clone https://git.forgeservicelab.fi/ansible-roles/forge_hostname.git
     - role: forge_hostname
       # $ sudo ansible-galaxy install goozbach.EPEL
     - role: goozbach.EPEL
