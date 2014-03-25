@@ -2,7 +2,7 @@
 
   vars:
     ldaps_port: 636
-    webui_port: 443
+    phpldapadmin_port: 8443
     ldap_dn: dc=julkict,dc=forgeservicelab,dc=fi
 
   vars_files:
@@ -36,14 +36,15 @@
       openldap_server_dn: "{{ ldap_dn }}"
       # $ git clone https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
     - role: phpldapadmin
+      phpldapadmin_port: "{{ phpldapadmin_port }}"
       phpldapadmin_dn: "{{ ldap_dn }}"
       phpldapadmin_ldap_port: "{{ ldaps_port }}"
       phpldapadmin_ldap_uri: "ldaps://127.0.0.1"
 
   tasks:
     - shell: lokkit -p {{ ldaps_port }}:tcp
-    - shell: lokkit -p {{ webui_port }}:tcp
+    - shell: lokkit -p {{ phpldapadmin_port }}:tcp
 
   post_tasks:
     - debug:
-        msg: "visit https://{{ ansible_fqdn }}:{{ webui_port }}/phpldapadmin"
+        msg: "visit https://{{ ansible_fqdn }}:{{ phpldapadmin_port }}/phpldapadmin"
