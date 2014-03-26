@@ -3,6 +3,7 @@
   vars:
     ldaps_port: 636
     phpldapadmin_port: 8443
+    casino_port: 443
     ldap_dn: dc=julkict,dc=forgeservicelab,dc=fi
 
   vars_files:
@@ -21,9 +22,11 @@
   roles:
       # $ git clone https://git.forgeservicelab.fi/ansible-roles/forge_hostname.git
     - role: forge_hostname
+
       # $ sudo ansible-galaxy install goozbach.EPEL
     - role: goozbach.EPEL
       when: verify_epel_installed|failed
+
       # $ git clone https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
     - role: openldap_server
       openldap_server_domain_name: "{{ ansible_fqdn }}"
@@ -34,6 +37,7 @@
       openldap_server_location: Helsinki
       openldap_server_organization: JulkICTLAB
       openldap_server_dn: "{{ ldap_dn }}"
+
       # $ git clone https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
     - role: phpldapadmin
       phpldapadmin_port: "{{ phpldapadmin_port }}"
@@ -41,10 +45,25 @@
       phpldapadmin_ldap_port: "{{ ldaps_port }}"
       phpldapadmin_ldap_uri: "ldaps://127.0.0.1"
 
+      # $ sudo ansible-galaxy install mstrisoline.ruby-builder
+    - role: mstrisoline.ruby-builder
+      ruby_builder_ruby_version: '1.9.3-p484'
+
+      # $ git clone https://git.forgeservicelab.fi/ansible-roles/casino.git
+    - role: casino
+      casino_port: "{{ casino_port }}"
+      casino_ldap_host: localhost
+      casino_ldap_port: "{{ ldaps_port }}"
+      casino_ldap_users_dn: "ou=people,{{ ldap_dn }}"
+      casino_ldap_username_attribute: cn
+
   tasks:
     - shell: lokkit -p {{ ldaps_port }}:tcp
     - shell: lokkit -p {{ phpldapadmin_port }}:tcp
+    - shell: lokkit -p {{ casino_port }}:tcp
 
   post_tasks:
     - debug:
-        msg: "visit https://{{ ansible_fqdn }}:{{ phpldapadmin_port }}/phpldapadmin"
+        msg: "visit https://{{ ansible_fqdn }}:{{ phpldapadmin_port }}/phpldapadmin to add users"
+    - debug:
+        msg: "visit https://{{ ansible_fqdn }}:{{ casino_port }} to see the CASino interface"
