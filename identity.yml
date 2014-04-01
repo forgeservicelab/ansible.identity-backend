@@ -4,10 +4,12 @@
     ldaps_port: 636
     phpldapadmin_port: 8443
     casino_port: 443
-    ldap_dn: dc=julkict,dc=forgeservicelab,dc=fi
+    ldap_dn: dc=forgeservicelab,dc=fi
+    binder_dn: "cn=binder,ou=people,{{ ldap_dn }}"
+
 
   vars_files:
-    # secrets.yml must define ldap_admin_password
+    # secrets.yml must define ldap_admin_password and binder_password
     - secrets.yml
 
   pre_tasks:
@@ -37,6 +39,8 @@
       openldap_server_location: Helsinki
       openldap_server_organization: JulkICTLAB
       openldap_server_dn: "{{ ldap_dn }}"
+      openldap_server_binder_dn: "{{ binder_dn }}"
+      openldap_server_binder_password: "{{ binder_password }}"
 
       # $ git clone https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
     - role: phpldapadmin
@@ -44,6 +48,9 @@
       phpldapadmin_dn: "{{ ldap_dn }}"
       phpldapadmin_ldap_port: "{{ ldaps_port }}"
       phpldapadmin_ldap_uri: "ldaps://127.0.0.1"
+      phpldapadmin_binder_dn: "{{ binder_dn }}"
+      phpldapadmin_binder_password: "{{ binder_password }}"
+
 
       # $ sudo ansible-galaxy install mstrisoline.ruby-builder
     - role: mstrisoline.ruby-builder
@@ -56,6 +63,16 @@
       casino_ldap_port: "{{ ldaps_port }}"
       casino_ldap_users_dn: "ou=people,{{ ldap_dn }}"
       casino_ldap_username_attribute: cn
+      casino_ldap_binder_dn: "{{ binder_dn }}"
+      casino_ldap_binder_password: "{{ binder_password }}"
+
+      # $ git clone https://git.forgeservicelab.fi/ansible-roles/forge_users.git
+    - role: forge_users
+      forge_users_private_token: "{{ gitlab_private_token }}"
+      forge_users_list:
+        - jrodrigu
+        - tkarasek
+        - erno.koliseva
 
   tasks:
     - shell: lokkit -p {{ ldaps_port }}:tcp
