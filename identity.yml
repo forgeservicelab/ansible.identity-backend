@@ -73,6 +73,8 @@
         - jrodrigu
         - tkarasek
         - erno.koliseva
+        - tero.elonen
+      tags: users
 
   tasks:
     - shell: lokkit -p {{ ldaps_port }}:tcp
