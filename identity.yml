@@ -65,6 +65,7 @@
       casino_ldap_username_attribute: cn
       casino_ldap_binder_dn: "{{ binder_dn }}"
       casino_ldap_binder_password: "{{ binder_password }}"
+      tags: cas
 
       # $ git clone https://git.forgeservicelab.fi/ansible-roles/forge_users.git
     - role: forge_users
