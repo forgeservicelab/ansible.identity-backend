@@ -12,24 +12,12 @@
     # secrets.yml must define ldap_admin_password and binder_password
     - secrets.yml
 
-  pre_tasks:
-    - shell: yum --enablerepo epel version
-      register: verify_epel_installed
-      ignore_errors: True
-
-    - name: remove installed libyaml as it conflicts with EPEL libyaml
-      yum: name=libyaml state=removed
-      when: verify_epel_installed|failed
 
   roles:
-      # $ git clone https://git.forgeservicelab.fi/ansible-roles/forge_hostname.git
     - role: forge_hostname
 
-      # $ sudo ansible-galaxy install goozbach.EPEL
-    - role: goozbach.EPEL
-      when: verify_epel_installed|failed
+    - role: ansible-role-repo-epel
 
-      # $ git clone https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
     - role: openldap_server
       openldap_server_domain_name: "{{ ansible_fqdn }}"
       openldap_server_rootpw: "{{ ldap_admin_password }}"
@@ -42,7 +30,6 @@
       openldap_server_binder_dn: "{{ binder_dn }}"
       openldap_server_binder_password: "{{ binder_password }}"
 
-      # $ git clone https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
     - role: phpldapadmin
       phpldapadmin_port: "{{ phpldapadmin_port }}"
       phpldapadmin_dn: "{{ ldap_dn }}"
@@ -50,13 +37,12 @@
       phpldapadmin_ldap_uri: "ldaps://127.0.0.1"
       phpldapadmin_binder_dn: "{{ binder_dn }}"
       phpldapadmin_binder_password: "{{ binder_password }}"
+      tags: phpldapadmin
 
 
-      # $ sudo ansible-galaxy install mstrisoline.ruby-builder
     - role: mstrisoline.ruby-builder
       ruby_builder_ruby_version: '1.9.3-p484'
 
-      # $ git clone https://git.forgeservicelab.fi/ansible-roles/casino.git
     - role: casino
       casino_port: "{{ casino_port }}"
       casino_ldap_host: localhost
@@ -67,7 +53,6 @@
       casino_ldap_binder_password: "{{ binder_password }}"
       tags: cas
 
-      # $ git clone https://git.forgeservicelab.fi/ansible-roles/forge_users.git
     - role: forge_users
       forge_users_private_token: "{{ gitlab_private_token }}"
       forge_users_list:
@@ -78,9 +63,14 @@
       tags: users
 
   tasks:
-    - shell: lokkit -p {{ ldaps_port }}:tcp
-    - shell: lokkit -p {{ phpldapadmin_port }}:tcp
-    - shell: lokkit -p {{ casino_port }}:tcp
+    - shell: lokkit -p {{ item }}:tcp
+      with_items:
+        - "{{ ldaps_port }}"
+        - "{{ phpldapadmin_port }}"
+        - "{{ casino_port }}"
+      # CentOS 7 has iptables off by default
+      when:
+        ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
 
   post_tasks:
     - debug:

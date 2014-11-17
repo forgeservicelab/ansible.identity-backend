@@ -4,3 +4,5 @@
 - src: git+https://git.forgeservicelab.fi/ansible-roles/forge_users.git
 - src: git+https://git.forgeservicelab.fi/ansible-roles/casino.git
 - src: git+https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
+- src: git+https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
+- src: https://github.com/geerlingguy/ansible-role-repo-epel
