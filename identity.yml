@@ -12,6 +12,12 @@
     # secrets.yml must define ldap_admin_password and binder_password
     - secrets.yml
 
+  pre_tasks:
+    - name: disable selinux in configuration (takes effect after reboot)
+      selinux:
+        state: disabled
+    - name: actually turn selinux off
+      shell: setenforce permissive
 
   roles:
     - role: forge_hostname
