@@ -59,14 +59,16 @@
       casino_ldap_binder_password: "{{ binder_password }}"
       tags: cas
 
-    - role: forge_users
-      forge_users_private_token: "{{ gitlab_private_token }}"
-      forge_users_list:
-        - jrodrigu
-        - tkarasek
-        - erno.koliseva
-        - tero.elonen
-      tags: users
+    # if you want to user forge_users role, your secrets.yml must contain
+    # gitlab_private_token to get public keys of users from git.
+    #- role: forge_users
+    #  forge_users_private_token: "{{ gitlab_private_token }}"
+    #  forge_users_list:
+    #    - jrodrigu
+    #    - tkarasek
+    #    - erno.koliseva
+    #    - tero.elonen
+    #  tags: users
 
   tasks:
     - shell: lokkit -p {{ item }}:tcp

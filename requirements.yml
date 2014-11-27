@@ -1,7 +1,7 @@
 - src: git+https://git.forgeservicelab.fi/ansible-roles/forge_hostname.git
 - src: goozbach.EPEL
 - src: mstrisoline.ruby-builder
-- src: git+https://git.forgeservicelab.fi/ansible-roles/forge_users.git
+#- src: git+https://git.forgeservicelab.fi/ansible-roles/forge_users.git
 - src: git+https://git.forgeservicelab.fi/ansible-roles/casino.git
 - src: git+https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
 - src: git+https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
