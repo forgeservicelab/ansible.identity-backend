@@ -18,6 +18,7 @@
         state: disabled
     - name: actually turn selinux off
       shell: setenforce permissive
+      ignore_errors: True
 
   roles:
     - role: forge_hostname
