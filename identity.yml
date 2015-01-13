@@ -5,12 +5,13 @@
     phpldapadmin_port: 8443
     casino_port: 443
     ldap_dn: dc=forgeservicelab,dc=fi
-    binder_dn: "cn=binder,ou=people,{{ ldap_dn }}"
+    binder_dn: "cn=binder,ou=accounts,{{ ldap_dn }}"
+    pwdchanger_dn: "cn=pwdchanger,ou=accounts,{{ ldap_dn }}"
 
 
   vars_files:
-    # secrets.yml must define ldap_admin_password and binder_password
-    - secrets.yml
+    # secrets.yml must define ldap_admin_password, binder_password and pwdchanger_password
+    - files/secrets.yml
 
   pre_tasks:
     - name: disable selinux in configuration (takes effect after reboot)
@@ -18,6 +19,7 @@
         state: disabled
     - name: actually turn selinux off
       shell: setenforce permissive
+      ignore_errors: true
 
   roles:
     - role: forge_hostname
@@ -31,16 +33,24 @@
       openldap_server_country: FI
       openldap_server_state: Uusimaa
       openldap_server_location: Helsinki
-      openldap_server_organization: JulkICTLAB
+      openldap_server_organization: DIGILE
       openldap_server_dn: "{{ ldap_dn }}"
       openldap_server_binder_dn: "{{ binder_dn }}"
       openldap_server_binder_password: "{{ binder_password }}"
+      openldap_server_pwdchanger_dn: "{{ pwdchanger_dn }}"
+      openldap_server_pwdchanger_password: "{{ pwdchanger_password }}"
+
+    # - role: openldap_populator
+    #   entities_file: entities/digile.yml
+    #   openldap_server_dn: "{{ ldap_dn }}"
+    #   openldap_server_rootpw: "{{ ldap_admin_password }}"
 
     - role: phpldapadmin
       phpldapadmin_port: "{{ phpldapadmin_port }}"
       phpldapadmin_dn: "{{ ldap_dn }}"
       phpldapadmin_ldap_port: "{{ ldaps_port }}"
       phpldapadmin_ldap_uri: "ldaps://127.0.0.1"
+      phpldapadmin_accounts_subtree: 'ou=accounts'
       phpldapadmin_binder_dn: "{{ binder_dn }}"
       phpldapadmin_binder_password: "{{ binder_password }}"
       tags: phpldapadmin
@@ -53,11 +63,13 @@
       casino_port: "{{ casino_port }}"
       casino_ldap_host: localhost
       casino_ldap_port: "{{ ldaps_port }}"
-      casino_ldap_users_dn: "ou=people,{{ ldap_dn }}"
+      casino_ldap_users_dn: "ou=accounts,{{ ldap_dn }}"
       casino_ldap_username_attribute: cn
       casino_ldap_binder_dn: "{{ binder_dn }}"
       casino_ldap_binder_password: "{{ binder_password }}"
       tags: cas
+
+    - role: synchronizer
 
     # if you want to user forge_users role, your secrets.yml must contain
     # gitlab_private_token to get public keys of users from git.
