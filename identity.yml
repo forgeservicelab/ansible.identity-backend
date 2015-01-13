@@ -10,8 +10,9 @@
 
 
   vars_files:
-    # secrets.yml must define ldap_admin_password, binder_password and pwdchanger_password
-    - files/secrets.yml
+    # secrets.yml must define ldap_admin_password, binder_password and pwdchanger_password as well as any
+    # other needed identity variables.
+    - secrets.yml
 
   pre_tasks:
     - name: disable selinux in configuration (takes effect after reboot)
@@ -39,11 +40,6 @@
       openldap_server_binder_password: "{{ binder_password }}"
       openldap_server_pwdchanger_dn: "{{ pwdchanger_dn }}"
       openldap_server_pwdchanger_password: "{{ pwdchanger_password }}"
-
-    # - role: openldap_populator
-    #   entities_file: entities/digile.yml
-    #   openldap_server_dn: "{{ ldap_dn }}"
-    #   openldap_server_rootpw: "{{ ldap_admin_password }}"
 
     - role: phpldapadmin
       phpldapadmin_port: "{{ phpldapadmin_port }}"
