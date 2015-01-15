@@ -6,6 +6,7 @@
     casino_port: 443
     ldap_dn: dc=forgeservicelab,dc=fi
     binder_dn: "cn=binder,ou=accounts,{{ ldap_dn }}"
+    syncer_dn: "cn=syncer,ou=accounts,{{ ldap_dn }}"
     pwdchanger_dn: "cn=pwdchanger,ou=accounts,{{ ldap_dn }}"
 
 
@@ -38,6 +39,8 @@
       openldap_server_dn: "{{ ldap_dn }}"
       openldap_server_binder_dn: "{{ binder_dn }}"
       openldap_server_binder_password: "{{ binder_password }}"
+      openldap_server_syncer_dn: "{{ syncer_dn }}"
+      openldap_server_syncer_password: "{{ syncer_password }}"
       openldap_server_pwdchanger_dn: "{{ pwdchanger_dn }}"
       openldap_server_pwdchanger_password: "{{ pwdchanger_password }}"
 
@@ -87,6 +90,14 @@
       # CentOS 7 has iptables off by default
       when:
         ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
+
+    - copy:
+        src: forgeservicelab.fi.key
+        dest: "{{ openldap_server_app_path }}/certs/my.key"
+
+    - copy:
+        src: forgeservicelab.fi.crt
+        dest: "{{ openldap_server_app_path }}/certs/cert.crt"
 
   post_tasks:
     - debug:
