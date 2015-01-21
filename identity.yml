@@ -93,11 +93,15 @@
 
     - copy:
         src: forgeservicelab.fi.key
-        dest: "{{ openldap_server_app_path }}/certs/my.key"
+        dest: "{{ openldap_server_app_path }}/certs/server.key"
 
     - copy:
         src: forgeservicelab.fi.crt
         dest: "{{ openldap_server_app_path }}/certs/cert.crt"
+
+    - copy:
+        src: forgeservicelab.fi.crt.chain
+        dest: "{{ openldap_server_app_path }}/certs/cacert.crt"
 
   post_tasks:
     - debug:
