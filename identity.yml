@@ -113,3 +113,5 @@
         msg: "visit https://{{ ansible_fqdn }}:{{ phpldapadmin_port }}/phpldapadmin to add users"
     - debug:
         msg: "visit https://{{ ansible_fqdn }}:{{ casino_port }} to see the CASino interface"
+    - debug:
+        msg: "visit https://{{ simplesamlphp_fqdn }}:443 to see the IdP interface"
