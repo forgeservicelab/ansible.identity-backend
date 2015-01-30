@@ -68,6 +68,8 @@
       ruby_builder_ruby_version: '1.9.3-p484'
 
     - role: casino
+      casino_repo: "https://{{ forge_git_usr }}:{{ forge_git_pwd}}@git.forgeservicelab.fi/forge/casinoapp.git"
+      casino_version: forge
       casino_port: "{{ casino_port }}"
       casino_ldap_host: localhost
       casino_ldap_port: "{{ ldaps_port }}"
