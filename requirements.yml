@@ -4,5 +4,6 @@
 - src: git+https://git.forgeservicelab.fi/ansible-roles/casino.git
 - src: git+https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
 - src: git+https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
-- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/synchronizer.git
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/forge_ssl.git
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/simplesamlphp.git
 - src: https://github.com/geerlingguy/ansible-role-repo-epel
