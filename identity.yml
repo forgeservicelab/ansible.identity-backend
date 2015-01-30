@@ -26,6 +26,8 @@
   roles:
     - role: forge_hostname
 
+    - role: forge_ssl
+
     - role: ansible-role-repo-epel
 
     - role: openldap_server
@@ -43,6 +45,10 @@
       openldap_server_syncer_password: "{{ syncer_password }}"
       openldap_server_pwdchanger_dn: "{{ pwdchanger_dn }}"
       openldap_server_pwdchanger_password: "{{ pwdchanger_password }}"
+      openldap_server_cacert: roles/forge_ssl/files/forgeservicelab.fi.crt.chain
+      openldap_server_cert: roles/forge_ssl/files/forgeservicelab.fi.crt
+      openldap_server_key: forgeservicelab.fi.key
+      upload_certs: True
 
     - role: phpldapadmin
       phpldapadmin_port: "{{ phpldapadmin_port }}"
@@ -52,6 +58,9 @@
       phpldapadmin_accounts_subtree: 'ou=accounts'
       phpldapadmin_binder_dn: "{{ binder_dn }}"
       phpldapadmin_binder_password: "{{ binder_password }}"
+      phpldapadmin_ssl_ca_cert: "{{ forge_ssl_cert_chain }}"
+      phpldapadmin_ssl_cert: "{{ forge_ssl_cert }}"
+      phpldapadmin_ssl_key: "{{ forge_ssl_key }}"
       tags: phpldapadmin
 
 
@@ -66,9 +75,17 @@
       casino_ldap_username_attribute: cn
       casino_ldap_binder_dn: "{{ binder_dn }}"
       casino_ldap_binder_password: "{{ binder_password }}"
+      casino_ssl_ca_cert: "{{ forge_ssl_cert_chain }}"
+      casino_ssl_cert: "{{ forge_ssl_cert }}"
+      casino_ssl_key: "{{ forge_ssl_key }}"
       tags: cas
 
-    - role: synchronizer
+    - role: simplesamlphp
+      simplesamlphp_admin_password: "{{ saml_admin_password }}"
+      simplesamlphp_ldap_binder_password: "{{ binder_password }}"
+      simplesamlphp_suburi: ""
+      simplesamlphp_fqdn: idp.forgeservicelab.fi
+      tags: idp
 
     # if you want to user forge_users role, your secrets.yml must contain
     # gitlab_private_token to get public keys of users from git.
@@ -90,18 +107,6 @@
       # CentOS 7 has iptables off by default
       when:
         ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
-
-    - copy:
-        src: forgeservicelab.fi.key
-        dest: "{{ openldap_server_app_path }}/certs/server.key"
-
-    - copy:
-        src: forgeservicelab.fi.crt
-        dest: "{{ openldap_server_app_path }}/certs/cert.crt"
-
-    - copy:
-        src: forgeservicelab.fi.crt.chain
-        dest: "{{ openldap_server_app_path }}/certs/cacert.crt"
 
   post_tasks:
     - debug:
