@@ -100,12 +100,8 @@
   </rule>
   <!-- SSH access -->
   <rule family="ipv4">
-    <source address="213.145.192.0/24" />
-    <service name="ssh" />
-    <accept />
-  </rule>
-  <rule family="ipv4">
-    <source address="212.68.9.98" />
+    <!-- KE access -->
+    <source address="213.145.192.7" />
     <service name="ssh" />
     <accept />
   </rule>
