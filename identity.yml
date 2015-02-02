@@ -89,6 +89,11 @@
       simplesamlphp_fqdn: idp.forgeservicelab.fi
       tags: idp
 
+    - role: firewallder
+      services_dir: ../../../files/services
+      zones_dir: ../../../files/zones
+      tags: firewall
+
     # if you want to user forge_users role, your secrets.yml must contain
     # gitlab_private_token to get public keys of users from git.
     #- role: forge_users

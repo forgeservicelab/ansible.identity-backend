@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>Nagios NRPE service</short>
+  <description>Nagios Remote Process Executor allows Nagios monitoring system to run scripts locally on the monitored system.</description>
+  <port protocol="tcp" port="5666"/>
+</service>

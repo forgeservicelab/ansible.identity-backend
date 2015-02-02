@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<zone>
+  <short>Public</short>
+  <description>For use in public areas. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+  <service name="dhcpv6-client" />
+  <service name="http" />
+  <service name="https" />
+  <!-- Alternative HTTPS port for phpLDAPadmin -->
+  <rule family="ipv4">
+    <!-- Digile office -->
+    <source address="83.150.108.249" />
+    <service name="alt-https" />
+    <accept />
+  </rule>
+  <!-- Allow Nagios NRPE -->
+  <rule family="ipv4">
+    <!-- Nagios core -->
+    <source address="193.166.24.126" />
+    <service name="nagios" />
+    <accept />
+  </rule>
+  <!-- LDAPS access -->
+  <rule family="ipv4">
+    <!-- production OpenStack -->
+    <source address="193.166.24.4" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production OpenStack -->
+    <source address="193.166.24.5" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production OpenStack -->
+    <source address="193.166.24.6" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing OpenStack -->
+    <source address="193.166.24.11" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing OpenStack -->
+    <source address="193.166.24.12" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing OpenStack -->
+    <source address="193.166.24.13" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- devel OpenStack -->
+    <source address="193.166.24.17" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- devel OpenStack -->
+    <source address="193.166.24.18" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- devel OpenStack -->
+    <source address="193.166.24.19" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- redmine and xmpp -->
+    <source address="86.50.27.37" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- forge admin -->
+    <source address="86.50.27.230" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production drupal01 -->
+    <source address="86.50.28.4" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production drupal02 -->
+    <source address="86.50.28.5" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <!-- SSH access -->
+  <rule family="ipv4">
+    <source address="213.145.192.0/24" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <source address="212.68.9.98" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- Digile office -->
+    <source address="83.150.108.249" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+</zone>
