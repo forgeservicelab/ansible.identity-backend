@@ -75,8 +75,44 @@
     <accept />
   </rule>
   <rule family="ipv4">
-    <!-- redmine and xmpp -->
+    <!-- production redmine and xmpp -->
     <source address="86.50.27.37" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production gitlab -->
+    <source address="193.166.24.105" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production jenkins -->
+    <source address="193.166.24.197" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production nagios -->
+    <source address="193.166.24.126" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing redmine and xmpp -->
+    <source address="193.166.24.138" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing gitlab -->
+    <source address="193.166.24.210" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- production jenkins -->
+    <source address="193.166.25.25" />
     <service name="ldaps" />
     <accept />
   </rule>
@@ -95,6 +131,42 @@
   <rule family="ipv4">
     <!-- production drupal02 -->
     <source address="86.50.28.5" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- security drupal01 -->
+    <source address="193.166.25.216" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- security drupal02 -->
+    <source address="193.166.25.217" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing drupal01 -->
+    <source address="193.166.24.165" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing drupal02 -->
+    <source address="193.166.24.190" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- devel drupal01 -->
+    <source address="193.166.24.201" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- devel drupal02 -->
+    <source address="193.166.24.204" />
     <service name="ldaps" />
     <accept />
   </rule>
