@@ -99,6 +99,12 @@
     <accept />
   </rule>
   <rule family="ipv4">
+    <!-- production analytics -->
+    <source address="193.166.24.104" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
     <!-- testing redmine and xmpp -->
     <source address="193.166.24.138" />
     <service name="ldaps" />
@@ -111,8 +117,14 @@
     <accept />
   </rule>
   <rule family="ipv4">
-    <!-- production jenkins -->
+    <!-- testing jenkins -->
     <source address="193.166.25.25" />
+    <service name="ldaps" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- testing analytics -->
+    <source address="193.166.25.75" />
     <service name="ldaps" />
     <accept />
   </rule>
