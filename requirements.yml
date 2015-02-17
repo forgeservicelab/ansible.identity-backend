@@ -1,9 +1,26 @@
 - src: git+https://git.forgeservicelab.fi/ansible-roles/forge_hostname.git
+  path: roles/
+
 - src: mstrisoline.ruby-builder
+  path: roles/
+
 - src: git+https://git.forgeservicelab.fi/ansible-roles/firewallder.git
+  path: roles/
+
 - src: git+https://git.forgeservicelab.fi/ansible-roles/casino.git
+  path: roles/
+
 - src: git+https://git.forgeservicelab.fi/ansible-roles/openldap_server.git
+  path: roles/
+
 - src: git+https://git.forgeservicelab.fi/ansible-roles/phpldapadmin.git
+  path: roles/
+
 - src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/forge_ssl.git
+  path: roles/
+
 - src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/simplesamlphp.git
+  path: roles/
+
 - src: https://github.com/geerlingguy/ansible-role-repo-epel
+  path: roles/
