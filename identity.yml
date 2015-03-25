@@ -1,4 +1,4 @@
-- hosts: "{{ h }}"
+- hosts: "{{ target }}"
 
   vars:
     ldaps_port: 636
@@ -68,7 +68,7 @@
       ruby_builder_ruby_version: '1.9.3-p484'
 
     - role: casino
-      casino_repo: "https://{{ forge_git_usr }}:{{ forge_git_pwd}}@git.forgeservicelab.fi/forge/casinoapp.git"
+      casino_repo: "https://{{ forge_git_usr }}:{{ forge_git_pwd }}@git.forgeservicelab.fi/forge/casinoapp.git"
       casino_version: forge
       casino_port: "{{ casino_port }}"
       casino_ldap_host: localhost
@@ -80,6 +80,10 @@
       casino_ssl_ca_cert: "{{ forge_ssl_cert_chain }}"
       casino_ssl_cert: "{{ forge_ssl_cert }}"
       casino_ssl_key: "{{ forge_ssl_key }}"
+      casino_db_name: "{{ casino_db }}"
+      casino_db_host: dbserver.forgeservicelab.fi
+      casino_db_username: "{{ casino_db_usr }}"
+      casino_db_password: "{{ casino_db_pwd }}"
       tags: cas
 
     - role: simplesamlphp
