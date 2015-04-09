@@ -93,6 +93,15 @@
       simplesamlphp_fqdn: idp.forgeservicelab.fi
       tags: idp
 
+    - role: ltb_password_app
+      ltb_password_app_repo: "https://{{ forge_git_usr }}:{{ forge_git_pwd }}@git.forgeservicelab.fi/forge/forge-password-change.git"
+      ltb_ldap_url: "ldaps://127.0.0.1"
+      ltb_ldap_binddn: "{{ pwdchanger_dn }}"
+      ltb_ldap_bindpw: "{{ pwdchanger_password }}"
+      ltb_recaptcha_pub: "{{ recaptcha_public_key }}"
+      ltb_recaptcha_priv: "{{ recaptcha_private_key }}"
+      tags: password
+
     - role: firewallder
       services_dir: ../../../files/services
       zones_dir: ../../../files/zones

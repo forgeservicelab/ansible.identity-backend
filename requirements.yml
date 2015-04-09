@@ -22,5 +22,8 @@
 - src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/simplesamlphp.git
   path: roles/
 
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/ltb_password_app.git
+  path: roles/
+
 - src: https://github.com/geerlingguy/ansible-role-repo-epel
   path: roles/
