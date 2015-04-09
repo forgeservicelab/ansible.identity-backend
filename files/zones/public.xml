@@ -195,4 +195,10 @@
     <service name="ssh" />
     <accept />
   </rule>
+  <rule family="ipv4">
+    <!-- Local tenant network -->
+    <source address="192.168.192.0/27" />
+    <service name="ssh" />
+    <accept />
+  </rule>
 </zone>
