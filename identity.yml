@@ -81,7 +81,7 @@
       casino_ssl_cert: "{{ forge_ssl_cert }}"
       casino_ssl_key: "{{ forge_ssl_key }}"
       casino_db_name: "{{ casino_db }}"
-      casino_db_host: dbserver.forgeservicelab.fi
+      casino_db_host: "{{ casino_db_fqdn }}"
       casino_db_username: "{{ casino_db_usr }}"
       casino_db_password: "{{ casino_db_pwd }}"
       tags: cas
@@ -90,7 +90,7 @@
       simplesamlphp_admin_password: "{{ saml_admin_password }}"
       simplesamlphp_ldap_binder_password: "{{ binder_password }}"
       simplesamlphp_suburi: ""
-      simplesamlphp_fqdn: idp.forgeservicelab.fi
+      simplesamlphp_fqdn: "{{ simplesamlphp_host }}"
       tags: idp
 
     - role: ltb_password_app

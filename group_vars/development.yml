@@ -1,3 +1,4 @@
 ---
 casino_db_fqdn: 193.166.25.222
 casino_db: CASinoApp_development
+simplesamlphp_host: 193.166.25.220
