@@ -1,0 +1,8 @@
+[production]
+auth2.forgeservicelab.fi
+
+[testing]
+testauth.forgeservicelab.fi
+
+[development]
+193.166.25.220
