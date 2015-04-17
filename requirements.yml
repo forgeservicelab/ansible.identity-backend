@@ -4,7 +4,7 @@
 - src: mstrisoline.ruby-builder
   path: roles/
 
-- src: git+https://git.forgeservicelab.fi/ansible-roles/firewallder.git
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/firewallder.git
   path: roles/
 
 - src: git+https://git.forgeservicelab.fi/ansible-roles/casino.git
