@@ -201,4 +201,40 @@
     <service name="ssh" />
     <accept />
   </rule>
+  <rule family="ipv4">
+    <!-- Jenkins master -->
+    <source address="193.166.24.197" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- CI grid chunk 1 -->
+    <source address="193.166.24.246/31" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- CI grid chunk 2 -->
+    <source address="193.166.24.235" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- CI grid chunk 3 -->
+    <source address="193.166.24.250" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- CI grid chunk 4 -->
+    <source address="193.166.24.236/30" />
+    <service name="ssh" />
+    <accept />
+  </rule>
+  <rule family="ipv4">
+    <!-- CI grid chunk 5 -->
+    <source address="193.166.24.248/31" />
+    <service name="ssh" />
+    <accept />
+  </rule>
 </zone>
