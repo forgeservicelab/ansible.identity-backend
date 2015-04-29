@@ -76,7 +76,7 @@
   </rule>
   <rule family="ipv4">
     <!-- production redmine and xmpp -->
-    <source address="86.50.27.37" />
+    <source address="193.166.25.157" />
     <service name="ldaps" />
     <accept />
   </rule>
