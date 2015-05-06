@@ -237,4 +237,10 @@
     <service name="ssh" />
     <accept />
   </rule>
+  <rule family="ipv4">
+    <!-- Backup server -->
+    <source address="193.166.24.141" />
+    <service name="ssh" />
+    <accept />
+  </rule>
 </zone>
