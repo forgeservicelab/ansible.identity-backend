@@ -243,4 +243,10 @@
     <service name="ssh" />
     <accept />
   </rule>
+  <rule family="ipv4">
+    <!-- Admin node -->
+    <source address="86.50.27.230" />
+    <service name="ssh" />
+    <accept />
+  </rule>
 </zone>
