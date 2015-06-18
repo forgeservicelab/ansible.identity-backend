@@ -84,6 +84,8 @@
       casino_db_host: "{{ casino_db_fqdn }}"
       casino_db_username: "{{ casino_db_usr }}"
       casino_db_password: "{{ casino_db_pwd }}"
+      casino_server_aliases:
+        - auth2.forgeservicelab.fi
       tags: cas
 
     - role: simplesamlphp
@@ -129,6 +131,15 @@
         ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
 
   post_tasks:
+    - name: Disable httpd's default sites
+      command: "mv {{ item }}.conf {{ item }}.conf.disabled"
+      args:
+        chdir: /etc/httpd/conf.d
+      with_items:
+        - autoindex
+        - ssl
+        - userdir
+        - welcome
     - name: Upload dynamic list syncer script
       template:
         src: files/dynlist_sync.py
