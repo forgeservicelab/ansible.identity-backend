@@ -1,0 +1,8 @@
+---
+casino_db_fqdn: dbserver.forgeservicelab.fi
+casino_db: CASinoApp_testing
+simplesamlphp_host: testidp.forgeservicelab.fi
+HPKP:
+  pin1: <HPKP PIN1>
+  pin2: <HPKP PIN2>
+
